@@ -2,7 +2,7 @@
 // @name          MS Forms QA/QC - Prefill + Select YES
 // @namespace    http://tampermonkey.net/
 // @version      2026-04-26
-// @description  try to take over the world!
+// @description  QAQC form etc!
 // @author       You
 // @match        https://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
