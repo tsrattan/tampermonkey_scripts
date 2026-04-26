@@ -1,0 +1,122 @@
+Nice—this screenshot actually shows exactly what we need 👍
+From what I can see in your HTML:
+
+
+The radio input does have value="Yes" ✅
+
+
+There’s also data-automation-value="Yes" ✅
+
+
+And a visible label with text “Yes” ✅
+
+
+So your original idea was close, it just needs to be a bit smarter.
+
+✅ Use this (most reliable for your form)
+Paste this into the console:
+document.querySelectorAll('input[type="radio"][value="Yes"]').forEach(el => {  if (!el.checked) {    el.click();  }});
+Why this works well for your form:
+
+
+Targets only radio buttons with value="Yes"
+
+
+Avoids re-clicking already selected ones
+
+
+Matches what your screenshot shows
+
+
+
+🚀 Even better (handles weird MS Forms behavior)
+Microsoft Forms sometimes hides inputs and uses labels/spans for clicks.
+This version is more robust:
+document.querySelectorAll('[data-automation-value="Yes"]').forEach(el => {  el.click();});
+👉 Based on your screenshot, this is very likely the best one
+
+🧪 If something doesn’t click properly
+Use this fallback (label-based):
+document.querySelectorAll('span').forEach(el => {  if (el.innerText.trim() === 'Yes') {    el.click();  }});
+
+⚡ Your final workflow (super fast now)
+For each page:
+
+
+Open form
+
+
+Press F12 → Console (or use bookmark later)
+
+
+Paste script → Enter
+
+
+All “Yes” selected instantly
+
+
+Click Next
+
+
+
+🔥 Pro tip (worth doing)
+Turn this into a bookmark so you don’t open console every time:
+javascript:(function(){  document.querySelectorAll('[data-automation-value="Yes"]').forEach(el => el.click());})();
+Now it’s literally:
+
+Open page → click bookmark → done
+
+
+If you want, I can make one more upgrade so it:
+
+
+Selects only one “Yes” per question group (extra safe)
+
+
+Works across all pages without mis-clicks
+
+
+Just say 👍
+
+
+✅ Step 1: Create the bookmark
+
+In your browser (Chrome or Edge):
+
+Press Ctrl + D (or click the ⭐ star in the address bar)
+Save it anywhere (e.g., Bookmarks bar)
+Click Edit (or right-click → Edit)
+✏️ Step 2: Replace the URL with this script
+
+Delete the URL and paste this:
+
+javascript:(function(){
+  document.querySelectorAll('[data-automation-value="Yes"]').forEach(el => el.click());
+})();
+🏷️ Step 3: Name it
+
+Call it something like:
+
+Fill Yes
+Auto Yes
+
+Click Save
+
+🚀 Step 4: Use it (this is your daily flow)
+
+For each person:
+
+Open the Microsoft Forms page
+Enter the name
+Click your Fill Yes bookmark
+👉 All “Yes” options on that page get selected instantly
+Click Next manually
+Repeat on each page
+Submit
+⚠️ If nothing happens when you click it
+
+Common fixes:
+
+Make sure you are on the form page, not a blank tab
+Try clicking once, wait 1 second
+If still nothing, I can tweak the script for your exact form
