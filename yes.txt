@@ -1,1 +1,32 @@
 javascript:(function(){ document.querySelectorAll('[data-automation-value="Yes"]').forEach(el => el.click());   })();
+
+javascript:(function(){ document.querySelectorAll('[data-automation-value="Yes"]').forEach((el, i) => setTimeout(() => el.click(), 
+
+
+--------
+
+javascript:(function () {
+  const el = document.querySelector('input[data-automation-id="textInput"]');
+  if (!el) return alert('Field not found');
+
+  el.focus();
+  el.value = 'Rattan Tajinder';
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+  el.dispatchEvent(new Event('change', { bubbles: true }));
+})();
+
+
+------
+javascript:(function () {
+  const el = document.querySelector('input[data-automation-id="textInput"]');
+  if (!el) return alert('Field not found');
+
+  el.focus();
+  const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+  setter.call(el, 'Rattan Tajinder');
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+  el.dispatchEvent(new Event('change', { bubbles: true }));
+  el.blur();
+})();
+
+
