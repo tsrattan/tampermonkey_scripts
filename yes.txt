@@ -136,3 +136,29 @@ javascript:(function () {
 
 
 
+====================================================================
+autohotkey
+
+#Requires AutoHotkey v2.0
+
+^!i:: {
+    url := "https://ibossauorchard.securitasamea.com/Planning/Calendar"
+    js := "javascript:(()=>{const wanted='Microsoft SYD27';function selectLocation(){const input=document.querySelector('input[role=""combobox""][aria-owns=""location_listbox""]');if(!input)return false;input.focus();input.value=wanted;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));setTimeout(()=>{const item=[...document.querySelectorAll('[role=""option""],.k-item,tr,td')].find(el=>el.textContent.trim().includes(wanted));if(item)item.click();else input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));},500);return true;}const timer=setInterval(()=>{if(selectLocation())clearInterval(timer);},700);})();"
+
+    Run(url)
+    Sleep(5000)
+
+    Send("^l")
+    Sleep(200)
+    A_Clipboard := js
+    Sleep(200)
+    Send("^v")
+    Sleep(200)
+    Send("{Enter}")
+}
+
+
+========================================
+bookmark
+
+javascript:(()=>{const wanted='Microsoft SYD27';function selectLocation(){const input=document.querySelector('input[role="combobox"][aria-owns="location_listbox"]');if(!input)return false;input.focus();input.value=wanted;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));setTimeout(()=>{const item=[...document.querySelectorAll('[role="option"],.k-item,tr,td')].find(el=>el.textContent.trim().includes(wanted));if(item){item.click();console.log('Selected:',wanted);}else{input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));}},500);return true;}const timer=setInterval(()=>{if(selectLocation())clearInterval(timer);},700);})();
