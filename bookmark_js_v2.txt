@@ -26,3 +26,46 @@ javascript:(function(){ let clicked=false; document.querySelectorAll('[role="opt
 iboss:
 
 javascript:(()=>{const wanted='Microsoft SYD27';function selectLocation(){const input=document.querySelector('input[role="combobox"][aria-owns="location_listbox"]');if(!input)return false;input.focus();input.value=wanted;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));setTimeout(()=>{const item=[...document.querySelectorAll('[role="option"],.k-item,tr,td')].find(el=>el.textContent.trim().includes(wanted));if(item){item.click();console.log('Selected:',wanted);}else{input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));}},500);return true;}const timer=setInterval(()=>{if(selectLocation())clearInterval(timer);},700);})();
+
+
+
+
+javascript:(function () {
+  const radios = document.querySelectorAll('span[data-automation-id="radio"][data-automation-value]');
+
+  let hasYes = false;
+  let hasNo = false;
+  let hasNA = false;
+
+  radios.forEach(span => {
+    const val = span.getAttribute('data-automation-value').trim().toLowerCase();
+    if (val === 'yes') hasYes = true;
+    if (val === 'no') hasNo = true;
+    if (val === 'n/a' || val === 'not applicable') hasNA = true;
+  });
+
+  // Decide which value to select
+  let target = null;
+  if (hasYes && hasNo && hasNA) {
+    target = 'na'; // special marker
+  } else if (hasYes) {
+    target = 'yes';
+  }
+
+  if (!target) return;
+
+  radios.forEach(span => {
+    const val = span.getAttribute('data-automation-value').trim().toLowerCase();
+    const input = span.querySelector('input[type="radio"]');
+
+    if (!input) return;
+
+    if (target === 'yes' && val === 'yes') {
+      input.click();
+    }
+
+    if (target === 'na' && (val === 'n/a' || val === 'not applicable')) {
+      input.click();
+    }
+  });
+})();
