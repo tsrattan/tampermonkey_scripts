@@ -21,3 +21,8 @@ javascript:(function(){ document.querySelectorAll('[data-automation-value="Yes"]
 N/A:
 
 javascript:(function(){ let clicked=false; document.querySelectorAll('[role="option"]').forEach(opt=>{ if(opt.getAttribute("data-automation-value")==="N/A"){ opt.click(); clicked=true; } }); if(!clicked){ document.querySelectorAll('[data-automation-value="Yes"]').forEach(el=>el.click()); } })();
+
+
+iboss:
+
+javascript:(()=>{const wanted='Microsoft SYD27';function selectLocation(){const input=document.querySelector('input[role="combobox"][aria-owns="location_listbox"]');if(!input)return false;input.focus();input.value=wanted;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));setTimeout(()=>{const item=[...document.querySelectorAll('[role="option"],.k-item,tr,td')].find(el=>el.textContent.trim().includes(wanted));if(item){item.click();console.log('Selected:',wanted);}else{input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',keyCode:13,which:13,bubbles:true}));}},500);return true;}const timer=setInterval(()=>{if(selectLocation())clearInterval(timer);},700);})();
