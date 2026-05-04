@@ -1,0 +1,24 @@
+ptest:
+
+javascript:(function(){  function setReactInput(i,v){    const s=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,"value").set;    s.call(i,v);    i.dispatchEvent(new Event("input",{bubbles:true}));  }  const inputs=document.querySelectorAll('input[placeholder="Enter your answer"]');  if(inputs.length>0){    setReactInput(inputs[0],"Rattan Tajinder");  }  const firstValue="APAC";  const firstDropdown=document.querySelector("div[aria-haspopup='listbox']");  if(firstDropdown) firstDropdown.click();  setTimeout(()=>{    const lb=document.querySelector("div[role='listbox']");    if(lb){      const opt=[...lb.querySelectorAll("div[role='option'] span[aria-label]")]        .find(e=>e.getAttribute("aria-label")===firstValue);      if(opt) opt.click();    }  },300);})();
+
+
+QAQC:
+
+javascript:(function(){  /* --- 1. Fill text input with "Rattan Tajinder" --- */  function setReactInput(i,v){    const s=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,"value").set;    s.call(i,v);    i.dispatchEvent(new Event("input",{bubbles:true}));  }  const inputs=document.querySelectorAll('input[placeholder="Enter your answer"]');  if(inputs.length>0){    setReactInput(inputs[0],"Rattan Tajinder");  }  /* --- 2. Select APAC in FIRST dropdown --- */  const firstValue="APAC";  const firstDropdown=document.querySelector(    "div[aria-haspopup='listbox'][aria-describedby*='rdc8e7e25c60d4299b714bae2e6f616a2']"  );  if(firstDropdown) firstDropdown.click();  setTimeout(()=>{    const lb1=document.querySelector("div[role='listbox']");    if(lb1){      const opt1=[...document.querySelectorAll("div[role='option'] span[aria-label]")]        .find(e=>e.getAttribute("aria-label")===firstValue);      if(opt1) opt1.click();    }    /* --- 3. Select SYD27 in SECOND dropdown --- */    const secondValue="SYD27";    const secondDropdown=document.querySelector(      "div[aria-haspopup='listbox'][aria-describedby*='r3a6bd4c6eeeb4c62bc2540409c943906']"    );    if(secondDropdown) secondDropdown.click();    setTimeout(()=>{      const lb2=document.querySelector("div[role='listbox']");      if(!lb2){ alert("Second listbox not found"); return; }      lb2.scrollTop=lb2.scrollHeight;      setTimeout(()=>{        const opt2=[...document.querySelectorAll("div[role='option'] span[aria-label]")]          .find(e=>e.getAttribute("aria-label")===secondValue);        if(opt2){          opt2.click();          alert("Done: APAC + SYD27 + Rattan Tajinder");        } else {          alert("SYD27 not found");        }      },300);    },300);  },300);})();
+
+
+syd27:
+
+javascript:(function(){const t="SYD27";const trg=document.querySelector("div[aria-haspopup='listbox'][role='button']");if(trg)trg.click();setTimeout(()=>{const lb=document.querySelector("div[role='listbox']");if(!lb){alert("Listbox not found");return;}lb.scrollTop=lb.scrollHeight;setTimeout(()=>{const opt=[...document.querySelectorAll("div[role='option'] span[aria-label]")].find(e=>e.getAttribute("aria-label")===t);if(opt){opt.click();alert("Selected "+t);}else{alert("Option not found");}},300);},300);})();
+
+
+yes:
+
+javascript:(function(){ document.querySelectorAll('[data-automation-value="Yes"]').forEach(el => el.click());   })();
+
+
+N/A:
+
+javascript:(function(){   document.querySelectorAll('[role="option"]').forEach(opt => {     const val = opt.getAttribute("data-automation-value");      // Prefer N/A if it exists     if (val === "N/A") {       opt.click();     }   });    // If no N/A was found, select Yes   if (!document.querySelector('[data-automation-value="N/A"]')) {     document.querySelectorAll('[data-automation-value="Yes"]').forEach(el => el.click());   } })();
+
