@@ -69,3 +69,83 @@ javascript:(function () {
     }
   });
 })();
+
+
+
+
+=======
+
+// ==UserScript==
+// @name         Auto Fill & Select Options
+// @namespace    http://tampermonkey.net/
+// @version      1.1
+// @description  Automatically fill input and select dropdown options, with extra delay for refreshed lists
+// @author       You
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    function setReactInput(i, v) {
+        const s = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        s.call(i, v);
+        i.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    const inputs = document.querySelectorAll('input[placeholder="Enter your answer"]');
+    if (inputs.length > 0) {
+        setReactInput(inputs[0], "Rattan Tajinder");
+    }
+
+    const firstValue = "APAC";
+    const dropdowns = document.querySelectorAll("div[aria-haspopup='listbox']");
+    const firstDropdown = dropdowns[0];
+    if (firstDropdown) firstDropdown.click();
+
+    setTimeout(() => {
+        const lb1 = document.querySelector("div[role='listbox']");
+        if (!lb1) {
+            alert("First dropdown did not open");
+            return;
+        }
+        const opt1 = [...document.querySelectorAll("div[role='option'] span[aria-label]")]
+            .find(e => e.getAttribute("aria-label") === firstValue);
+        if (!opt1) {
+            alert("APAC not found — stopping");
+            return;
+        }
+        opt1.click();
+
+        // --- EXTRA DELAY HERE to let the second dropdown refresh ---
+        setTimeout(() => {
+            const secondValue = "SYD27";
+            const secondDropdown = document.querySelectorAll("div[aria-haspopup='listbox']")[1];
+            if (secondDropdown) secondDropdown.click();
+
+            setTimeout(() => {
+                const allLb = document.querySelectorAll("div[role='listbox']");
+                const lb2 = allLb[allLb.length - 1];
+                if (!lb2) {
+                    alert("Second listbox not found");
+                    return;
+                }
+                lb2.scrollTop = lb2.scrollHeight;
+
+                setTimeout(() => {
+                    const opt2 = [...document.querySelectorAll("div[role='option'] span[aria-label]")]
+                        .find(e => e.getAttribute("aria-label") === secondValue);
+                    if (opt2) {
+                        opt2.click();
+                        alert("Done: APAC + SYD27 + Rattan Tajinder");
+                    } else {
+                        alert("SYD27 not found");
+                    }
+                }, 300);
+            }, 300);
+        }, 800); // Increased delay — adjust this number if needed (milliseconds)
+        // Example: 1000 = 1 second, 1500 = 1.5 seconds
+    }, 300);
+})();
+
