@@ -1,14 +1,10 @@
 // ==UserScript==
 // @name         Remove Web Limits v5
-// @namespace    https://github.com/remove-web-limits-v5
+// @namespace    remove-web-limits-v5
 // @version      5.0.0
 // @description  Removes copy/paste/select/right-click restrictions. Modernised & enhanced fork.
 // @match        *://*/*
-// @exclude      *://www.bilibili.com/video*
-// @exclude      *://www.bilibili.com/bangumi*
 // @exclude      *://www.youtube.com/watch*
-// @exclude      *://www.douyu.com/*
-// @exclude      *://www.twitch.tv/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
