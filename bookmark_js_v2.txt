@@ -33,3 +33,9 @@ javascript:(()=>{const wanted='Microsoft SYD27';function selectLocation(){const 
 
 
 
+new qaqc
+
+javascript:(function(){let clicks=0;const start=Date.now();const interval=setInterval(function(){document.querySelectorAll('[data-automation-value="Yes"]').forEach(b=>{b.click();clicks++;});if(Date.now()-start>500){clearInterval(interval);const q2=document.querySelector('input[name="raa38a38e6044405ca19ea10c52fa66df"][value="N/A"]');if(q2)q2.click();console.log("Done: Q1 Yes, Q2 N/A, Q3–10 Yes");}},100);})();
+
+
+
