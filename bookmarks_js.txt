@@ -1,3 +1,6 @@
+nord:
+javascript:(()=>{const id='personal-nord-toggle';const existing=document.getElementById(id);if(existing){existing.remove();return}const style=document.createElement('style');style.id=id;style.textContent='html{color-scheme:dark!important}html,body,body *:not(svg):not(svg *){background-color:#2E3440!important;color:#E5E9F0!important;border-color:#4C566A!important}body :is(a,a *,[role=link],[role=link] *){color:#88C0D0!important}body :is(button,[role=button],input,textarea,select){background-color:#3B4252!important}body :focus-visible{outline:2px solid #88C0D0!important}::selection{background:#88C0D0!important;color:#2E3440!important}';document.head.append(style)})()
+
 c_date:
 javascript:(function(){ %C2%A0function s(i,v){ %C2%A0 %C2%A0const t = Object.getOwnPropertyDescriptor( %C2%A0 %C2%A0 %C2%A0HTMLInputElement.prototype, %C2%A0 %C2%A0 %C2%A0"value" %C2%A0 %C2%A0).set; %C2%A0 %C2%A0t.call(i, v); %C2%A0 %C2%A0i.dispatchEvent(new Event("input", { bubbles: true })); %C2%A0 %C2%A0i.dispatchEvent(new Event("change", { bubbles: true })); %C2%A0} %C2%A0const d = new Date(); %C2%A0const cd = %C2%A0 %C2%A0String(d.getMonth() + 1).padStart(2, "0") + "/" + %C2%A0 %C2%A0String(d.getDate()).padStart(2, "0") + "/" + %C2%A0 %C2%A0d.getFullYear(); %C2%A0const di = document.querySelector('input[aria-label="Date picker"]'); %C2%A0if (di) s(di, cd);})();
 
