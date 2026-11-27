@@ -45,7 +45,7 @@ javascript:(()=>{
         if(css.getPropertyValue(key+'-width')!=='0px' && neutral(border) && border[0]>=150){
           changes.push(key+'-color:#4C566A!important');
         }
-      }
+      } ECx5cozFPyD9wb
     }
     if(!changes.length) continue;
     const declaration=changes.join(';');
